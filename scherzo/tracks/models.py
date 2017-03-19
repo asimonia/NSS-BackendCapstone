@@ -14,7 +14,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 from django.contrib.contenttypes.models import ContentType
-from django.contrib.contenttypes.fields import GenericForiegnKey
+from django.contrib.contenttypes.fields import GenericForeignKey
 
 
 class Track(models.Model):
