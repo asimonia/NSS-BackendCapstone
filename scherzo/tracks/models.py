@@ -13,6 +13,9 @@ Content:	The content that is found in the modules
 from django.db import models
 from django.contrib.auth.models import User
 
+from django.contrib.contenttypes.models import ContentType
+from django.contrib.contenttypes.fields import GenericForiegnKey
+
 
 class Track(models.Model):
 	"""Created by the admin.  These constants a teacher
@@ -55,3 +58,15 @@ class Module(models.Model):
 		return self.title
 
 
+class Content(models.Model):
+	"""Content found in the modules. Use a generic FK to point
+	to objects of any model.
+	content_type:	ForeignKey field to the ContentType model
+	object_id:		PositiveIntegerField to store the PK of the related object
+	item:			A GenericForeignKey field to the related object by combining
+					the two previous fields
+	"""
+	module = models.ForeignKey(Module, related_name='contents')
+	content_type = models.ForeignKey(ContentType)
+	object_id = models.PositiveIntegerField()
+	item = GenericForiegnKey('content_type', 'object_id')
