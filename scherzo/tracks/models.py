@@ -72,7 +72,7 @@ class Content(models.Model):
 																	'image',
 																	'file')})
 	object_id = models.PositiveIntegerField()
-	item = GenericForiegnKey('content_type', 'object_id')
+	item = GenericForeignKey('content_type', 'object_id')
 
 
 class ItemBase(models.Model):
