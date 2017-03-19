@@ -1,0 +1,74 @@
+[
+{
+  "model": "tracks.track",
+  "pk": 3,
+  "fields": {
+    "title": "Level 1 (easy)",
+    "slug": "level-1-easy"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 4,
+  "fields": {
+    "title": "Level 2 (easy)",
+    "slug": "level-2-easy"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 5,
+  "fields": {
+    "title": "Level 3 (easy)",
+    "slug": "level-3-easy"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 6,
+  "fields": {
+    "title": "Level 4 (medium)",
+    "slug": "level-4-medium"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 7,
+  "fields": {
+    "title": "Level 5 (medium)",
+    "slug": "level-5-medium"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 8,
+  "fields": {
+    "title": "Level 6 (medium)",
+    "slug": "level-6-medium"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 9,
+  "fields": {
+    "title": "Level 7 (hard)",
+    "slug": "level-7-hard"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 10,
+  "fields": {
+    "title": "Level 8 (hard)",
+    "slug": "level-8-hard"
+  }
+},
+{
+  "model": "tracks.track",
+  "pk": 11,
+  "fields": {
+    "title": "Level 9 (hard)",
+    "slug": "level-9-hard"
+  }
+}
+]
