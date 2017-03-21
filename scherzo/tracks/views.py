@@ -87,18 +87,24 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 	template_name = 'courses/manage/content/form.html'
 
 	def get_model(self, model_name):
+		"""Check the given model name is one of the four content models:
+		text, video, image, or file.  Use apps module to obtain the actual
+		class for the given model name.
+		"""
 		if model_name in ['text', 'video', 'image', 'file']:
 			return apps.get_model(app_label='courses', model_name=model_name)
 		return None
 
 	def get_form(self, model, *args, **kwargs):
+		"""Build a dynamic form and exclude the specified files"""
 		Form = modelform_factory(model, exclude=['owner', 'order', 'created', 'updated'])
 		return Form(*args, **kwargs)
 
 	def dispatch(self, request, module_id, id=None):
+		"""Receives the URL parameters and stores the module, model and content
+		object as class attributes"""
 		self.module = get_object_or_404(Module, id=module_id, course__owner=request.user)
 		self.model = self.get_model(model_name)
 		if id:
 			self.obj = get_object_or_404(self.model, id=id, owner=request.user)
 		return super().dispatch(request, module_id, model_name, id)
-		
