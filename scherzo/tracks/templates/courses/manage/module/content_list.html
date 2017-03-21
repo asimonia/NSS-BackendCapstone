@@ -2,7 +2,7 @@
 {% load course %}
 
 {% block title %}
-	Module {{ module.order|add: 1}}: {{ module.title }}
+    Module {{ module.order|add:1 }}: {{ module.title }}
 {% endblock %}
 
 {% block content %}
@@ -14,7 +14,7 @@
 			{% for m in course.modules.all %}
 				<li data-id="{{ m.id }}" {% if m == module %}class="selected"{% endif %}>
 					<a href="{% url 'module_content_list' m.id %}">
-						<span>Module <span class="order">{{ m.order|add: 1}}</span></span><br>
+						<span>Module <span class="order">{{ m.order|add:1 }}</span></span><br>
 						{{ m.title }}
 					</a>
 				</li>
@@ -22,7 +22,7 @@
 				<li>No modules yet.</li>
 			{% endfor %}
 		</ul>
-		<p><a href="{% url 'course_module_udpate' course.id %}">Editing modules</a></p>
+		<p><a href="{% url 'course_module_update' course.id %}">Editing modules</a></p>
 	</div>
 	<div class="module">
 		<h2>Module {{ module.order|add:1 }}: {{ module.title }}</h2>
