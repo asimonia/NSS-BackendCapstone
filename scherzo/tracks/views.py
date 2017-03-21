@@ -108,3 +108,25 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 		if id:
 			self.obj = get_object_or_404(self.model, id=id, owner=request.user)
 		return super().dispatch(request, module_id, model_name, id)
+
+	def get(self, request, module_id, model_name, id=None):
+		"""Executed when a GET request is received.  We build the model
+		for the Text, Video, Image, or File instance being updated.
+		"""
+		form = self.get_form(self.model, instance=self.obj)
+		return self.render_to_response({'form': form, 'object': self.obj})
+
+	def post(self, request, module_id, model_name, id=None):
+		"""Executed when POST request is received.  We build the modelform
+		passing any submitted data and files to it.  Then we validate it.
+		"""
+		form = self.get_form(self.model, instance=self.obj, data=request.POST, files=request.FILES)
+		if form.is_valid():
+			obj = form.save(commit=False)
+			obj.owner = request.user
+			obj.save()
+			if not id:
+				# new content
+				Content.objects.create(module=self.module, item=obj)
+			return redirect('module_content_list', self.module.id)
+		return self.render_to_response({'form': form, 'object': self.obj})
