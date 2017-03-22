@@ -9,6 +9,7 @@ class OrderField(models.PositiveIntegerField):
 	https://docs.djangoproject.com/en/1.10/howto/custom-model-fields/
 	"""
 	def __init__(self, for_fields=None, *args, **kwargs):
+		"""Indicate the fields that the order is calculated with respect to"""
 		self.for_fields = for_fields
 		super().__init__(*args, **kwargs)
 
