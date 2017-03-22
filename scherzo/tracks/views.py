@@ -177,6 +177,9 @@ class ContentOrderView(CsrfExemptMixin, JsonRequestResponseMixin, View):
 class CourseListView(TemplateResponseMixin, View):
 	"""List all available courses, filtered by track.
 	Display a single course overview.
+	Get all tracks, including the total number of courses for each.
+	Use the annotate() method with Count() aggregation.
+	Get all available courses, including the total number of modules contained in each course.
 	"""
 	model = Course
 	template_name = 'courses/course/list.html'
@@ -185,7 +188,7 @@ class CourseListView(TemplateResponseMixin, View):
 		tracks = Track.objects.annotate(total_courses=Count('courses'))
 		courses = Course.objects.annotate(total_modules=Count('modules'))
 		if track:
-			track = get_object_or_404(Track, slug=subject)
+			track = get_object_or_404(Track, slug=track)
 			courses = courses.filter(track=track)
 		return self.render_to_response({'tracks': tracks,
 										'track': track,
