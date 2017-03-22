@@ -6,6 +6,7 @@ from tracks.views import CourseListView
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^course/', include('tracks.urls')),
+    url(r'^students/', include('students.urls')),
     url(r'^accounts/login/$', auth_views.login, name='login'),
     url(r'^accounts/logout/$', auth_views.logout, name='logout'),
     url(r'^$', CourseListView.as_view(), name='course_list'),
