@@ -21,6 +21,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tracks',
+    'students',
 )
 
 # Middleware is a framework of hooks into Django’s request/response processing. 
