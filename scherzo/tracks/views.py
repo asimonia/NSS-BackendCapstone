@@ -4,6 +4,7 @@ from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.core.urlresolvers import reverse_lazy
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
 from django.shortcuts import redirect, get_object_or_404
 from django.views.generic.base import TemplateResponseMixin, View
 from django.forms.models import modelform_factory
@@ -194,3 +195,6 @@ class CourseListView(TemplateResponseMixin, View):
 										'track': track,
 										'courses': courses})
 
+class CourseDetailView(DetailView):
+	model = Course
+	template_name = 'courses/course/detail.html'
