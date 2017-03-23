@@ -103,7 +103,7 @@ class ContentCreateUpdateView(TemplateResponseMixin, View):
 		Form = modelform_factory(model, exclude=['owner', 'order', 'created', 'updated'])
 		return Form(*args, **kwargs)
 
-	def dispatch(self, request, module_id, id=None):
+	def dispatch(self, request, module_id, model_name, id=None):
 		"""Receives the URL parameters and stores the module, model and content
 		object as class attributes"""
 		self.module = get_object_or_404(Module, id=module_id, course__owner=request.user)

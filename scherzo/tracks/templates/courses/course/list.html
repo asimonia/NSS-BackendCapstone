@@ -34,7 +34,7 @@
     </div>
     <div class="module">
         {% for course in courses %}
-            {% with track=course.subject %}
+            {% with track=course.track %}
                 <h3><a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></h3>
                 <p>
                     <a href="{% url 'course_list_track' track.slug %}">{{ track }}</a>.
