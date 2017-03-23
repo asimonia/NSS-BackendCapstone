@@ -192,7 +192,7 @@ class CourseListView(TemplateResponseMixin, View):
 		if not tracks:
 			tracks = Track.objects.annotate(total_courses=Count('courses'))
 			cache.set('all_tracks', tracks)	
-		courses = Course.objects.annotate(total_modules=Count('modules'))
+		all_courses = Course.objects.annotate(total_modules=Count('modules'))
 		if track:
 			track = get_object_or_404(Track, slug=track)
 			key = 'track_{}_courses'.format(track.id)
