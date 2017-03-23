@@ -9,39 +9,39 @@
 {% endblock %}
 
 {% block content %}
-<h1>
-    {% if track %}
-        {{ track.title }} courses
-    {% else %}
-        All courses
-    {% endif %}
-</h1>
-<div class="contents">
-    <h3>Tracks</h3>
-    <ul id="modules">
-        <li {% if not track %}class='selected'{% endif %}>
-            <a href="{% url 'course_list' %}">All</a>
-        </li>
-        {% for t in tracks %}
-            <li {% if track == t %}class='selected'{% endif %}>
-                <a href="{% url 'course_list_track' t.slug %}">
-                    {{ t.title }}
-                    <br><span>{{ t.total_courses }} courses</span>
-                </a>
+    <h1>
+        {% if track %}
+            {{ track.title }} courses
+        {% else %}
+            All courses
+        {% endif %}
+    </h1>
+    <div class="contents">
+        <h3>Tracks</h3>
+        <ul id="modules">
+            <li {% if not track %}class='selected'{% endif %}>
+                <a href="{% url 'course_list' %}">All</a>
             </li>
+            {% for t in tracks %}
+                <li {% if track == t %}class='selected'{% endif %}>
+                    <a href="{% url 'course_list_track' t.slug %}">
+                        {{ t.title }}
+                        <br><span>{{ t.total_courses }} courses</span>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+    <div class="module">
+        {% for course in courses %}
+            {% with track=course.subject %}
+                <h3><a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></h3>
+                <p>
+                    <a href="{% url 'course_list_track' track.slug %}">{{ track }}</a>.
+                    {{ course.total_modules }} modules.
+                    Instructor: {{ course.owner.get_full_name }}
+                </p>
+            {% endwith %}
         {% endfor %}
-    </ul>
-</div>
-<div class="module">
-    {% for course in courses %}
-        {% with track=course.subject %}
-            <h3><a href="{% url 'course_detail' course.slug %}">{{ course.title }}</a></h3>
-            <p>
-                <a href="{% url 'course_list_track' track.slug %}">{{ track }}</a>.
-                {{ course.total_modules }} modules.
-                Instructor: {{ course.owner.get_full_name }}
-            </p>
-        {% endwith %}
-    {% endfor %}
-</div>
+    </div>
 {% endblock %}
