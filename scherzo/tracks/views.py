@@ -34,8 +34,6 @@ class OwnerEditMixin:
 
 class OwnerCourseMixin(OwnerMixin, LoginRequiredMixin):
 	model = Course
-	fields = ['track', 'title', 'slug', 'overview']
-	success_url = reverse_lazy('manage_course_list')
 
 
 class OwnerCourseEditMixin(OwnerCourseMixin, OwnerEditMixin):
@@ -53,7 +51,6 @@ class CourseCreateView(PermissionRequiredMixin, OwnerCourseEditMixin, CreateView
 
 
 class CourseUpdateView(PermissionRequiredMixin, OwnerCourseEditMixin, UpdateView):
-	template_name = 'courses/manage/course/form.html'
 	permission_required = 'courses.change_course'
 
 

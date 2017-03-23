@@ -47,7 +47,7 @@ class Course(models.Model):
 	overview:	TextField for an overview
 	created:	DateTime when course was created
 	"""
-	students = models.ManyToManyField(User, related_name='courses_joined', blank=True)
+	students = models.ManyToManyField(User, related_name='courses_enrolled', blank=True)
 	owner = models.ForeignKey(User, related_name='courses_created')
 	track = models.ForeignKey(Track, related_name='courses')
 	title = models.CharField(max_length=200)
