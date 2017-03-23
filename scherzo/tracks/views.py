@@ -15,7 +15,7 @@ from django.db.models import Count
 from .forms import ModuleFormSet
 from .models import Course, Module, Content, Track
 from students.forms import CourseEnrollForm
-
+from django.core.cache import cache
 
 
 class OwnerMixin:
@@ -188,11 +188,23 @@ class CourseListView(TemplateResponseMixin, View):
 	template_name = 'courses/course/list.html'
 
 	def get(self, request, track=None):
-		tracks = Track.objects.annotate(total_courses=Count('courses'))
+		tracks = cache.get('all_tracks')
+		if not tracks:
+			tracks = Track.objects.annotate(total_courses=Count('courses'))
+			cache.set('all_tracks', tracks)	
 		courses = Course.objects.annotate(total_modules=Count('modules'))
 		if track:
 			track = get_object_or_404(Track, slug=track)
-			courses = courses.filter(track=track)
+			key = 'track_{}_courses'.format(track.id)
+			courses = cache.get(key)
+			if not courses:
+				courses = courses.filter(track=track)
+				cache.set(key, courses)
+		else:
+			courses = cache.get('all_courses')
+			if not courses:
+				courses = all_courses
+				cache.set('all_courses', courses)
 		return self.render_to_response({'tracks': tracks,
 										'track': track,
 										'courses': courses})

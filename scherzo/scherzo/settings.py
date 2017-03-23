@@ -24,6 +24,7 @@ INSTALLED_APPS = (
     'tracks',
     'students',
     'embed_video',
+    'memcache_status',
 )
 
 # Middleware is a framework of hooks into Django’s request/response processing. 
